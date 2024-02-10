@@ -188,7 +188,6 @@ internal class Program
             default:
                 Console.WriteLine("You need to choose one on the options");
                 return;
-                break;
         }
 
         if (phone == null) return;
