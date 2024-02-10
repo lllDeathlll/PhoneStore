@@ -35,7 +35,7 @@ public class Phone
 
     public override string ToString()
     {
-        return String.Format($"{Model} - {ReleaseDate.Year}.{ReleaseDate.Month}.{ReleaseDate.Day}");
+        return String.Format($"{Model} - {ReleaseDate.Year}.{ReleaseDate.Month}.{ReleaseDate.Day} - ${Price}");
     }
 }
 
