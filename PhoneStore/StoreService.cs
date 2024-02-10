@@ -55,10 +55,9 @@ public class StoreService
                 var phonesList = JsonSerializer.Deserialize<List<Phone>>(jsonString);
                 Phones = phonesList;
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine(e);
-                throw;
+                Phones = new List<Phone>();
             }
 
         }
