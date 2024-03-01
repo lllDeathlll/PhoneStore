@@ -20,28 +20,27 @@ internal class Program
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("Phones:");
-                        for (int i = 1; i <= store.Phones.Count; i++)
-                        {
-                            Console.WriteLine($"{i}) {store.Phones.ElementAt(i-1)}");
-                        }
+                        ListPhones(store);
                         break;
                     case 2:
-                        AddPhone(store);
+                        ListPhonesByYear(store);
                         break;
                     case 3:
-                        BuyPhone(store);
+                        AddPhone(store);
                         break;
                     case 4:
-                        BuyAllPhones(store);
+                        BuyPhone(store);
                         break;
                     case 5:
-                        store.Save();
+                        BuyAllPhones(store);
                         break;
                     case 6:
-                        Console.Clear();
+                        store.Save();
                         break;
                     case 7:
+                        Console.Clear();
+                        break;
+                    case 8:
                         Environment.Exit(0);
                         break;
                     default:
@@ -68,12 +67,13 @@ internal class Program
     {
         Console.WriteLine("Options:\n" +
                           "1) List available phones \n" +
-                          "2) Add phone to store\n" +
-                          "3) Buy phone from store\n" +
-                          "4) Buy all phones\n" +
-                          "5) Save\n" +
-                          "6) Clear Console\n" +
-                          "7) Exit\n" +
+                          "2) List phones by release year \n" +
+                          "3) Add phone to store\n" +
+                          "4) Buy phone from store\n" +
+                          "5) Buy all phones\n" +
+                          "6) Save\n" +
+                          "7) Clear Console\n" +
+                          "8) Exit\n" +
                           "Help - list options");
     }
 
@@ -116,6 +116,31 @@ internal class Program
 
         Phone phone = new(model, price, date);
         return phone;
+    }
+
+    public static void ListPhones(StoreService store)
+    {
+        Console.WriteLine("Phones:");
+        for (int i = 1; i <= store.Phones.Count; i++)
+        {
+            Console.WriteLine($"{i}) {store.Phones.ElementAt(i-1)}");
+        }
+    }
+
+    private static void ListPhonesByYear(StoreService store)
+    {
+        Console.WriteLine("Enter the year:");
+        if (!int.TryParse(Console.ReadLine(), out int year))
+        {
+            Console.WriteLine("You must enter a valid year");
+            return;
+        }
+        var phones = store.Phones.Where((phone => phone.ReleaseDate.Year == year)).ToList();
+        Console.WriteLine("Phones:");
+        for (int i = 1; i <= phones.Count; i++)
+        {
+            Console.WriteLine($"{i}) {phones.ElementAt(i-1)}");
+        }
     }
 
     public static void AddPhone(StoreService store)
